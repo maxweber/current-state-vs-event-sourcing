@@ -1,0 +1,113 @@
+/* Org-HTML-Slideshow projection styles.
+ *
+ * These styles will apply only to the slide-show view.
+ */
+
+body {
+   margin: 18pt;
+   padding-left: 25pt;
+   padding-right: 25pt;
+   font-size: 24pt;
+}
+
+/* Use all headings as slide titles, regardless of level. */
+h1,h2,h3,h4,h5,h6,h7,h8 {
+   font-size: 48pt;
+   margin: 18pt;
+   text-align: center;
+}
+
+li {
+   margin: 12pt;
+}
+
+/* Center embedded images. */
+p.image {
+   text-align: center;
+}
+
+/* Hide Org-Mode tags in slide-show view. */
+span.tag {
+   display: none;
+}
+
+/* Hide Org-Mode section numbers in slide-show view. */
+span.section-number-1,span.section-number-2,span.section-number-3,span.section-number-4,span.section-number-5,span.section-number-6,span.section-number-7,span.section-number-8 {
+   display: none;
+}
+
+.blue_background {
+   background: blue;
+   color: white;
+}
+
+/* custom */
+
+html {
+   height: 100%;
+}
+
+body {
+   margin: 0;
+   height: 100%;
+}
+
+#current-slide {
+   height: 100%;
+}
+
+.centered_slide {
+   display:table;
+   width: 100%;
+   height: 100%;
+   font-size: 48pt;
+   font-weight: bold;
+}
+
+.centered_slide .outline-text {
+   display:table-cell;
+   vertical-align:middle;
+   text-align: center;
+}
+
+.centered_slide h2 {
+   display: none;
+}
+
+.me_slide {
+   font-size: 1.5em;
+}
+
+.logo_slide .image img {
+   max-width: 40%;
+}
+
+.tea_slide .image img {
+   max-width: 60%;
+}
+
+.logo_slide {
+   font-size: 0.8em;
+   color: grey;
+}
+
+.speech {
+
+}
+
+.vs_slide h2 {
+   display: none;
+}
+
+.vs_slide .image img {
+   padding-top: 2%;
+   max-height: 90%;
+}
+
+.three_layer_slide .image img {
+   max-height: 80%;
+}
+
+.cqrs_slide .image img {
+   max-height: 90%;
+}

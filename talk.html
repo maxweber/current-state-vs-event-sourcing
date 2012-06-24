@@ -1,0 +1,1716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Current state vs. (eve)nt sourcing</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-05-24 08:58:51 BST"/>
+<meta name="author" content="Max Weber"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" type="text/css" href="resources/common.css" />
+<link rel="stylesheet" type="text/css" href="resources/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="resources/projection.css" media="projection" />
+<link rel="stylesheet" type="text/css" href="resources/presenter.css" media="presenter" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Current state vs. (eve)nt sourcing</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Me</a>
+<ul>
+<li><a href="#sec-1-1">1.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 doo.net</a>
+<ul>
+<li><a href="#sec-2-1">2.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Title</a>
+<ul>
+<li><a href="#sec-3-1">3.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Motivation</a>
+<ul>
+<li><a href="#sec-4-1">4.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 The example</a>
+<ul>
+<li><a href="#sec-5-1">5.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 The example scenario</a>
+<ul>
+<li><a href="#sec-6-1">6.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 Clojure book</a>
+<ul>
+<li><a href="#sec-7-1">7.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 Tea</a>
+<ul>
+<li><a href="#sec-8-1">8.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9 The shopping cart</a>
+<ul>
+<li><a href="#sec-9-1">9.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10 The second scenario</a>
+<ul>
+<li><a href="#sec-10-1">10.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11 Current State of the second scenario</a>
+<ul>
+<li><a href="#sec-11-1">11.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-12">12 Event Sourcing - first scenario</a>
+<ul>
+<li><a href="#sec-12-1">12.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-13">13 Event Sourcing - second scenario</a>
+<ul>
+<li><a href="#sec-13-1">13.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-14">14 Derive the current state from the events</a>
+<ul>
+<li><a href="#sec-14-1">14.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-15">15 :vs_slide:slide: </a>
+<ul>
+<li><a href="#sec-15-1">15.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-16">16 A traditional 3 layer architecture</a>
+<ul>
+<li><a href="#sec-16-1">16.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-17">17 Read vs. Write</a>
+<ul>
+<li><a href="#sec-17-1">17.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-18">18 CQRS</a>
+<ul>
+<li><a href="#sec-18-1">18.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-19">19 CQS Definition</a>
+<ul>
+<li><a href="#sec-19-1">19.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-20">20 CQRS Architecture</a>
+<ul>
+<li><a href="#sec-20-1">20.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-21">21 The query side</a>
+<ul>
+<li><a href="#sec-21-1">21.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-22">22 The event bus</a>
+<ul>
+<li><a href="#sec-22-1">22.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-23">23 The event store</a>
+<ul>
+<li><a href="#sec-23-1">23.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-24">24 The command side</a>
+<ul>
+<li><a href="#sec-24-1">24.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-25">25 A command</a>
+<ul>
+<li><a href="#sec-25-1">25.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-26">26 Definition: Aggregate</a>
+<ul>
+<li><a href="#sec-26-1">26.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-27">27 An aggregate</a>
+<ul>
+<li><a href="#sec-27-1">27.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-28">28 A command handler</a>
+<ul>
+<li><a href="#sec-28-1">28.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-29">29 The aggregate repository</a>
+<ul>
+<li><a href="#sec-29-1">29.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-30">30 A shopping cart write model handler</a>
+<ul>
+<li><a href="#sec-30-1">30.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-31">31 A shopping cart command handler</a>
+<ul>
+<li><a href="#sec-31-1">31.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-32">32 eve</a>
+<ul>
+<li><a href="#sec-32-1">32.1 :notes: </a></li>
+</ul>
+</li>
+<li><a href="#sec-33">33 Questions</a></li>
+<li><a href="#sec-34">34 </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Me &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span>&nbsp;<span class="me_slide">me_slide</span></span></h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Max Weber<br/>
+github.com/maxweber<br/>
+@webermaximilian<br/>
+</p>
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>Hi, my name is Max Weber and I'm a Clojure developer at doo.net
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2 logo_slide">
+<h2 id="sec-2"><span class="section-number-2">2</span> doo.net &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+<img src="resources/logo.png"  alt="resources/logo.png" /><br/>
+visit our website: <a href="https://doo.net">doo.net</a>
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-2-1">
+
+<p>doo will bring you the paperless future by reinventing
+paperwork. Visit our website to learn more about our vision.
+</p>
+<p>
+At doo I'm responsible for our Clojure team and the architecture of
+our cloud system.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Title &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+Current state vs. (eve)nt sourcing
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>Today I am going to talk about event sourcing and how to combine it
+with the simplicity and power of Clojure. Therefore I am also going
+to explain the differences between event sourcing and the current
+state approach. The current state approach is the traditional way of
+modelling application state that we all know.
+</p>
+<p>
+After this introduction I am going to show you some ways how to
+implement event sourcing in Clojure.
+</p>
+<p>
+Then I'm going to present event sourcing in wider context and you will
+learn something about the CQRS architecture approach, which is often
+used in combination with event sourcing.
+</p>
+<p>
+Last but not least I am also going to introduce you to the new open
+source library eve, which we have started to extract from our codebase
+to help other people to do event sourcing and CQRS in Clojure.
+</p>
+<p>
+I am going to answer all your questions at the end of this talk.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Motivation &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+Motivation
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>So let's get started and talk about the motivation for using event
+sourcing. Maybe we should start with the most general perspective: the
+business side.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> The example &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+The example:<br/>
+</p>
+<p>
+An online shop
+</p>
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p>Let's take an online shop as an example to explain why event sourcing
+is useful.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> The example scenario &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-6">
+
+
+<p>
+The scenario
+</p>
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-6-1">
+
+<p>So here is the scenario.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Clojure book &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-7">
+
+<p><img src="resources/clojure-book.png"  alt="resources/clojure-book.png" />
+</p>
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-7-1">
+
+<p>You start your shopping tour and put a Clojure book into your shopping
+cart.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Tea &nbsp;&nbsp;&nbsp;<span class="tag"><span class="tea_slide">tea_slide</span>&nbsp;<span class="centered_slide">centered_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-8">
+
+
+<p>
+<img src="resources/tea.jpg"  alt="resources/tea.jpg" />
+</p>
+
+</div>
+
+<div id="outline-container-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-8-1">
+
+<p>The online shop have really everything on offer. So you also decide
+to order some more tea.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> The shopping cart &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-9">
+
+
+
+
+
+<pre class="src src-clojure">{<span class="org-constant">:shopping-cart</span> 123
+ <span class="org-constant">:customer</span> 42
+ <span class="org-constant">:items</span> {456 {<span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>
+              <span class="org-constant">:quantity</span> 1}
+         789 {<span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>
+              <span class="org-constant">:quantity</span> 1}}
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">etc.</span>
+}
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-9-1">
+
+
+<p>
+This could be one possible model for the shopping cart, which contains
+our chosen products. The data could be stored inside a document
+database or maybe it is just a view on some relational database
+tables. However the point is it represents the current state of our
+shopping tour.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> The second scenario &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span>&nbsp;<span class="centered_slide">centered_slide</span></span></h2>
+<div class="outline-text-2" id="text-10">
+
+
+<p>
+The second scenario
+</p>
+
+</div>
+
+<div id="outline-container-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-10-1">
+
+<p>So let's change our scenario a little bit: We pretend that our customer
+put the Clojure Book and the tea in his shopping cart like
+in the first scenario. But now our customer thinks: "Oh, I still have
+enough tea, maybe I order some more next time."  Therefore he removes
+the tea from the shopping cart. Now the end result would look like
+the following:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Current State of the second scenario &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-11">
+
+
+
+
+<pre class="src src-clojure">{<span class="org-constant">:shopping-cart</span> 123
+ <span class="org-constant">:customer</span> 42
+ <span class="org-constant">:items</span> {456 {<span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>
+              <span class="org-constant">:quantity</span> 1}}
+}
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-11-1">
+
+<p>If you look at the data, you will see that we have lost a valuable
+piece of information: The customer had Earl Grey Tea in his shopping
+cart and probably has interest to buy this product in the
+future. Therefore you have also lost a competitive advantage on the
+business side, since you are not able to increase your sales by
+recommenting the Earl Grey Tea the next time the customer visits your
+online shop.
+</p>
+<p>
+As a developer of the online shop you can of course implement such a
+recommendation system, which tracks the items of a shopping cart. But
+this kind of tracking or rather state keeping is not well supported by
+a current state architecture, since it is very different from a
+normal current state model.
+</p>
+<p>
+You also have to implement the tracking first, before you can collect
+the tracking data and use it in your recommendation system.
+</p>
+<p>
+By using event sourcing you can avoid this information loss, even in
+the case of future requirements, which are not so foreseenable like a
+recommendation system for an online shop.
+</p>
+<p>
+Especially when you analyse your historic data to learn more about the
+behaviour of your customers, you get a lot of competitive advantages.
+</p>
+<p>
+Since with event sourcing you have all the necessary data to answer
+questions like "Which product is removed from the shopping cart most
+often or replaced by another similar product?" or "Is there some
+pattern that your checkout process is often canceled at step three?"
+</p>
+<p>
+So lets take a look at an example how this online shop example can be
+modeled with event sourcing:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Event Sourcing - first scenario &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-12">
+
+
+
+
+
+<pre class="src src-clojure">[
+ {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+  <span class="org-constant">:shopping-cart</span> 123
+  <span class="org-constant">:product</span> 456
+  <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>
+  <span class="org-constant">:quantity</span> 1}
+ {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+  <span class="org-constant">:shopping-cart</span> 123
+  <span class="org-constant">:product</span> 789
+  <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>
+  <span class="org-constant">:quantity</span> 1}
+]
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-12-1">
+
+<p>So here we have two maps, which represents the event that a product
+has been added to a particular shopping cart. Both refer to the
+shopping cart id and the corresponding product ID. We have used
+the :_event entry here to define a name for an event. The event
+name is a keyword with a namespace here.
+</p>
+<p>
+These events would reflect our first online shop scenario, so lets add
+another event to also model the second scenario:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Event Sourcing - second scenario &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-13">
+
+
+
+
+<pre class="src src-clojure">[
+ {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+  <span class="org-constant">:shopping-cart</span> 123
+  <span class="org-constant">:product</span> 456
+  <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>
+  <span class="org-constant">:quantity</span> 1}
+ {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+  <span class="org-constant">:shopping-cart</span> 123
+  <span class="org-constant">:product</span> 789
+  <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>
+  <span class="org-constant">:quantity</span> 1}
+ {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/remove</span>
+  <span class="org-constant">:shopping-cart</span> 123
+  <span class="org-constant">:product</span> 789
+  <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>}
+]
+
+
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-13-1" class="outline-3">
+<h3 id="sec-13-1"><span class="section-number-3">13.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-13-1">
+
+<p>Here you have another event which states the fact that the customer
+has completely removed the "Earl Grey Tea" from his shopping cart. In
+comparison to the current state approach you don't lose any
+information here. However in the end you need to know what the online
+shop customer has ordered, when he do the checkout. So we need to
+build the current state for the shopping cart from the events somehow.
+</p>
+<p>
+The obvious function to transform a collection of events into a single
+value is: reduce
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Derive the current state from the events &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-14">
+
+
+
+
+<pre class="src src-clojure">(<span class="org-keyword">def</span> <span class="org-function-name">events</span>
+  [{<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/create</span>
+    <span class="org-constant">:shopping-cart</span> 123
+    <span class="org-constant">:customer</span> 42}
+   {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+    <span class="org-constant">:shopping-cart</span> 123
+    <span class="org-constant">:product</span> 456
+    <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>
+    <span class="org-constant">:quantity</span> 1}
+   {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+    <span class="org-constant">:shopping-cart</span> 123
+    <span class="org-constant">:product</span> 789
+    <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>
+    <span class="org-constant">:quantity</span> 1}
+   {<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/remove</span>
+    <span class="org-constant">:shopping-cart</span> 123
+    <span class="org-constant">:product</span> 789
+    <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>}
+   ])
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">shopping-cart-add</span> [shopping-cart event]
+  (<span class="org-variable-name">update-in</span> shopping-cart [<span class="org-constant">:items</span> (<span class="org-constant">:product</span> event)]
+                 #(<span class="org-variable-name">assoc</span> %
+                      <span class="org-constant">:product-name</span> (<span class="org-constant">:product-name</span> event)
+                      <span class="org-constant">:quantity</span> (<span class="org-variable-name">+</span> (<span class="org-constant">:quantity</span> % 0)
+                                   (<span class="org-constant">:quantity</span> event)))))
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">shopping-cart-remove</span> [shopping-cart event]
+  (<span class="org-variable-name">update-in</span> shopping-cart [<span class="org-constant">:items</span>] dissoc (<span class="org-constant">:product</span> event)))
+
+(<span class="org-keyword">def</span> <span class="org-function-name">shopping-cart-model</span>
+  (combine
+   (on <span class="org-constant">:shopping-cart/add</span> shopping-cart-add)
+   (on :shopping-cart/<span class="org-type">remove</span> shopping-cart-remove)
+   (on <span class="org-constant">:shopping-cart/create</span> (&lt;&lt; [<span class="org-constant">:shopping-cart</span> <span class="org-constant">:customer</span>]))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">current state</span>
+(<span class="org-variable-name">reduce</span> shopping-cart-model {} events)
+
+{<span class="org-constant">:items</span> {456 {<span class="org-constant">:quantity</span> 1, <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>}},
+ <span class="org-constant">:shopping-cart</span> 123,
+ <span class="org-constant">:customer</span> 42}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">a historic state</span>
+(<span class="org-variable-name">reduce</span> shopping-cart-model {} (<span class="org-variable-name">drop-last</span> events))
+
+{<span class="org-constant">:items</span>
+ {789 {<span class="org-constant">:quantity</span> 1, <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>},
+  456 {<span class="org-constant">:quantity</span> 1, <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>}},
+ <span class="org-constant">:shopping-cart</span> 123,
+ <span class="org-constant">:customer</span> 42}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">update an existing state (snapshot technique)</span>
+(<span class="org-keyword">def</span> <span class="org-function-name">existing-state</span>
+  {<span class="org-constant">:items</span>
+   {789 {<span class="org-constant">:quantity</span> 1, <span class="org-constant">:product-name</span> <span class="org-string">"Earl Grey Tea"</span>},
+    456 {<span class="org-constant">:quantity</span> 1, <span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>}},
+   <span class="org-constant">:shopping-cart</span> 123,
+   <span class="org-constant">:customer</span> 42})
+
+(<span class="org-variable-name">reduce</span> shopping-cart-model existing-state (<span class="org-variable-name">list</span> (<span class="org-variable-name">last</span> events)))
+
+{<span class="org-constant">:items</span> {456 {<span class="org-constant">:product-name</span> <span class="org-string">"Clojure Book"</span>, <span class="org-constant">:quantity</span> 1}},
+ <span class="org-constant">:customer</span> 42,
+ <span class="org-constant">:shopping-cart</span> 123}
+
+
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-14-1" class="outline-3">
+<h3 id="sec-14-1"><span class="section-number-3">14.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-14-1">
+
+<p>The event sourcing functions of eve offers some convenience when it
+comes to writing and combining functions, which can be used in a
+reduce to derive the current state from a sequence of events.
+</p>
+<p>
+@ Explain the source code on the slide
+</p>
+<p>
+At first sight the event sourcing approach may seem technical more
+complicated than the current state approach, but you will see that
+almost everything becomes easier and more flexible with event
+sourcing. The reason for this, is that capturing the state
+in the form of events is simple, while the current state approach
+complects serveral concerns.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="vs_slide">vs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-15">
+
+
+<p>
+<img src="resources/EuroClojure Current state vs. Event Sourcing.svg"  alt="resources/EuroClojure Current state vs. Event Sourcing.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-15-1" class="outline-3">
+<h3 id="sec-15-1"><span class="section-number-3">15.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-15-1">
+
+<p>As you can see here, an event captures what has happened at a given
+point in time in one value. So for every given point in time there is
+a separate value.
+</p>
+<p>
+The current state on the other hand complects all these values. The
+previously described information loss is only one of the consequences.
+</p>
+<p>
+Another one is that you only have this single model or rather view on
+your data. Consequently it is often the case that this model is used
+to implement different requirements of your system. This leads to the
+tendency that otherwise independent concerns of your system are often
+complected through the model of the current state. With event sourcing
+you are able to generate different models out of the events, which are
+adapted to the specific use cases.
+</p>
+<p>
+So I guess everybody inside this room knows, which benefits you can
+leverage, if you can use immutable data to solve your problem at
+hand. In comparison to the current state an event is immutable. So to
+perform a change in a system, which uses event sourcing, you append a
+new event to the existing events. This is also exactly the case in our
+online shop event sourcing example here.
+</p>
+<p>
+An event should never be modified, even if you have found a bug inside
+your system, you would emit new events, which compensates the effects
+of the bug.
+</p>
+<p>
+In this way the events shows exactly what has happened in your
+system and you get an audit log for free.
+</p>
+<p>
+This property that every state change in your system is always
+represented by an event, also helps you in other cases.
+</p>
+<p>
+Normally in an integration test you check what your system has
+done. With the help of the events, which has been emitted by your
+system during the test run, you are also able to check, what your
+system has not done. This is particular helpful for developing things
+like a financial trading system for example, where a wrong additional
+action can easly cost you thousands of dollars per second.
+</p>
+<p>
+Even if you only implement a small separate recommendation system, you
+can use the events from the online shop system to see what has
+happened. So you can continiously read the events from the other
+system and apply it to your system. For example if a product is not
+longer offered in the online shop, the recommendation system can read
+the corresponding event from the online shop system and take care that
+the affected product is not longer included in any future
+recommendations. Having only the current state the recommendation
+system has to synchronize its whole product table with the one of the
+online shop system, everytime.
+</p>
+<p>
+So lets get back to the data of the events on this slide. As you can
+see every event includes the id of the shopping cart and an _position
+entry. What is the reason for that?
+</p>
+<p>
+From Clojure's time model we have learned not to complect an identity
+with a value. While you only have a single value in a Clojure atom or
+ref, you have one value for every given point in time in the case of
+event sourcing. For that reason you have to make the identity and the
+notion of time explicit in the event value, to track what the causal
+order of the events is and to which identity they refer.
+</p>
+<p>
+So in the case of our shopping cart events you have to know that the
+"Earl Grey Tea" has been added to the shopping cart first, before it
+has been removed from it again. For the notion of time we use a
+logical clock here, which is a simple counter that is incremented on
+every new event. Here it is stored inside the _position entry of the
+event map. But you also need to know on which shopping cart the event
+has happened. So the :shopping-cart entry refers to our identity
+here.
+</p>
+<p>
+In the next section I'm going to compare a more traditional
+architecture with an architecture, where event sourcing is used. Also
+to discuss further points, where the current state approach complects
+different concerns.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> A traditional 3 layer architecture &nbsp;&nbsp;&nbsp;<span class="tag"><span class="three_layer_slide">three_layer_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-16">
+
+<p><img src="resources/3 layer architecture.svg"  alt="resources/3 layer architecture.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-16-1" class="outline-3">
+<h3 id="sec-16-1"><span class="section-number-3">16.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-16-1">
+
+<p>This picture shows a traditional 3-layer architecture. The domain
+model or rather its schema is often used throughout all the three
+layers. If you don't have a data centric programming language, the
+data of the domain model objects is mostly converted a couple of
+times. Database table records become domain objects, which are
+converted to DTO objects, so that they can used in the frontend. And
+of course all things go the other way around, when the user makes a
+change in frontend.
+</p>
+<p>
+However even if you use pure data for this, the point is that the
+schema used for the data is almost the same throughout all the three
+layers, while the data is used for very different tasks. Therefore it
+is also more likely that you end up with a complex solution, since the
+logic for the different tasks is somehow complected through shared
+schema of the used data.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Read vs. Write &nbsp;&nbsp;&nbsp;<span class="tag"><span class="centered_slide">centered_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-17">
+
+<p>Read<br/>
+vs.<br/>
+Write<br/>
+</p>
+
+</div>
+
+<div id="outline-container-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-17-1">
+
+<p>The two most different and elementary categories in which types of
+tasks can be divided are: read and write operations. Despite the fact
+that read and write operations are fundamentally different, in most of
+today's application the same model is used for the read and the write
+side.
+</p>
+<p>
+But these two categories have almost complete different
+requirements. The write part is all about keeping your data consistent
+or rather make changes to them with ACID guarantees, wherever it is
+possible. When you read your data you care more about nice query
+capabilities and short response times. Sometimes it even doesn't
+matter if the query result doesn't yield the current state of your
+data, think about a weekly updated sales report for example.
+</p>
+<p>
+The read and the write side normally have other scaling challenges,
+too. If you consider a typical application you will most often observe
+that the read count outweigh the writes about at least one
+magnitude. So if do not intertwine your read and write operations you
+are able to scale them independently from each other. In this way you
+can utilize the fact that it is a lot easier to scale read operations
+than consistent write operations. 
+</p>
+<p>
+This idea of the separation of the read and write side has already a
+name: CQRS.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> CQRS &nbsp;&nbsp;&nbsp;<span class="tag"><span class="centered_slide">centered_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-18">
+
+<p>CQRS<br/>
+<br/>
+Command Query Responsibility Segregation
+</p>
+
+</div>
+
+<div id="outline-container-18-1" class="outline-3">
+<h3 id="sec-18-1"><span class="section-number-3">18.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-18-1">
+
+<p>CQRS is the abbreviation of "Command Query Responsibility
+Segregation". Commands are write operations and queries are read
+operations.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> CQS Definition &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-19">
+
+
+<p>
+Bertrand Meyer:<br/>
+<br/>
+</p>
+<p>
+"every method should either be a command that performs an action, or a
+query that returns data to the caller, but not both. In other words,
+asking a question should not change the answer."
+</p>
+
+</div>
+
+<div id="outline-container-19-1" class="outline-3">
+<h3 id="sec-19-1"><span class="section-number-3">19.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-19-1">
+
+<p>The CQRS term has emerged from the CQS definition, which only
+describes the separation of commands and queries at the object
+level. CQRS apply this separation on the architecture level of a
+system. Furthermore it is often assumed that event sourcing is used
+at the heart of a CQRS architecture. In the next part I'm going to
+give you an overview of a typical CQRS architecture.
+</p>
+<p>
+The following picture shows an illustration of a CQRS architecture:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> CQRS Architecture &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-20">
+
+
+<p>
+<img src="resources/CQRS Architecture.svg"  alt="resources/CQRS Architecture.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-20-1" class="outline-3">
+<h3 id="sec-20-1"><span class="section-number-3">20.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-20-1">
+
+<p>The architecture illustration demonstrates the separation between the
+command and the query part very nicely. There is one application
+endpoint for the commands and another one for the queries. The query
+side is easier to comprehend than the command side. Therefore let's
+get started with the query side.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> The query side &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-21">
+
+
+<p>
+<img src="resources/CQRS Architecture - Query Side.svg"  alt="resources/CQRS Architecture - Query Side.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-21-1" class="outline-3">
+<h3 id="sec-21-1"><span class="section-number-3">21.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-21-1">
+
+
+<p>
+The query endpoint is merely a thin wrapper around some query statements
+for your database. In comparison to a traditional application it stays
+a very simple component, since it is not complected with a domain
+model or any other write concerns.
+</p>
+<p>
+Due to the fact that the data of the query side is only used for reading
+concerns, it is also called: read model.
+</p>
+<p> 
+In the introduction we have seen how to derive the current state or
+rather read model of a shopping cart from the given events.
+</p>
+<p>
+We have also learned that this is not the only read model we can
+derive from the events. So the database usually contains several
+different read models, which are derived from the same events.
+</p>
+<p>
+A read model is always adapted to a specific use case. So
+if you have a screen in your GUI, which displays some data, this is
+exactly the data of the corresponding read model. 
+</p>
+<p>
+If you have another screen or query you also have another read model
+for that. In this way the query endpoint merely have to return the data
+from the result of a query. So there is no need for any complex
+joins or other technologies here, which often makes you say OMG.
+</p>
+<p>
+Of course the read model approach also have some disadvantages. 
+</p>
+<p>
+In the main you trade storage for simplicity here. However nowadays
+storage is cheap, so you're making a good deal.
+</p>
+<p>
+Another issue with the read model approach is that it generates a lot
+of duplication. Database normalization teachs us to avoid duplication
+where ever it is possible, since it is so hard to cope with it in the
+case of an update. But the CQRS architecture has a solution for that.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> The event bus &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-22">
+
+
+<p>
+<img src="resources/CQRS Architecture - Event Bus.svg"  alt="resources/CQRS Architecture - Event Bus.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-22-1" class="outline-3">
+<h3 id="sec-22-1"><span class="section-number-3">22.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-22-1">
+
+
+<p>
+In the CQRS architecture illustration you see a component with the
+name event bus. This component is responsible to dispatch the events,
+which are the result of a command operation to the so called event
+handlers. 
+</p>
+<p>
+An event handler knows how to update a read model with the
+data of a new event. In our online shop scenario there would be one
+event handler that updates the read model of a shopping cart on the
+basis of the incoming shopping cart events.
+</p>
+<p>
+It is important to recognize that in ideal world, where you do not
+have to deal with any performance issues, you do not need to store a
+read model at all. Since you could simply derive it on demand. Similar
+considerations could also be found in the paper "Out of the Tar Pit"
+by Ben Moseley and Peter Marks. If you havn't read this paper yet, you
+should put in the top of your reading list.
+</p>
+<p>
+Nevertheless the event bus can also dispatch the events to other
+components or systems, which for example updates their database, sends
+emails or performs any other side effects.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-23" class="outline-2">
+<h2 id="sec-23"><span class="section-number-2">23</span> The event store &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-23">
+
+
+<p>
+<img src="resources/CQRS Architecture - Event Store.svg"  alt="resources/CQRS Architecture - Event Store.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-23-1" class="outline-3">
+<h3 id="sec-23-1"><span class="section-number-3">23.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-23-1">
+
+
+<p>
+So now we know how the read models are updated and the events are
+dispatched by the event bus. But the events also have to be stored
+somewhere.
+</p>
+<p>
+In a CQRS architecture this task is dedicated to a so-called event
+store.
+</p>
+<p>
+An event store can be realized as a normal database table, where one
+record is stored for every event. The events inside the event store
+are the primary data source. All other state is just another view on
+this stream of events or in other words it is derived from the events.
+</p>
+<p>
+The immutability of the events also offers some nice design options
+regarding the event store. Since an event will not be modified, the
+event store can be append only. There is no coordination involved,
+when different parts of the system append events or read existing
+events from the event store. Consequently the database for the event
+store doesn't need to have any special coordination capabilities like
+transactions for example. So an easy to scale durable key value store
+is sufficient as a database for an event store. Last but not least
+immutable data also offers the possibility to be cached, which is
+another good option to increase the over all performance of your
+system.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-24" class="outline-2">
+<h2 id="sec-24"><span class="section-number-2">24</span> The command side &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-24">
+
+
+<p>
+<img src="resources/CQRS Architecture - Command Side.svg"  alt="resources/CQRS Architecture - Command Side.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-24-1" class="outline-3">
+<h3 id="sec-24-1"><span class="section-number-3">24.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-24-1">
+
+<p>Now we come to the command side that contains the heart of the
+application: the domain logic.
+</p>
+<p>
+It handles all write operations of the system and takes care that all
+conditions are kept. In our online shop scenario this could be the
+condition that after a checkout a user should not be able to modify
+the contents of the corresponding shopping cart anymore.
+</p>
+<p>
+Write operations are expressed in the form of commands and instruct
+the system to perform an action like adding a product to a shopping
+cart.
+</p>
+<p>
+A command often contains almost the same data as the corresponding
+event. The difference between a command and an event is that the event
+has already happened, while the command is a pending operation, which
+can be rejected, modified or deferred by the system.
+</p>
+<p>
+So let's take a look at an example command:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-25" class="outline-2">
+<h2 id="sec-25"><span class="section-number-2">25</span> A command &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-25">
+
+
+
+
+<pre class="src src-clojure">{<span class="org-constant">:_command</span> <span class="org-constant">:shopping-cart/add</span>
+ <span class="org-constant">:shopping-cart</span> 123
+ <span class="org-constant">:product</span> 456
+ <span class="org-constant">:name</span> <span class="org-string">"Clojure Book"</span>
+ <span class="org-constant">:quantity</span> 1}
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-25-1" class="outline-3">
+<h3 id="sec-25-1"><span class="section-number-3">25.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-25-1">
+
+<p>You see that the command almost contains the same data as the
+corresponding :shopping-cart/add event.
+</p>
+<p>
+So, the question is: Who should process this :shopping-cart/add
+command and what should be the boundary of this operation in which all
+the data is kept consistent?
+</p>
+<p>
+Therefore a CQRS architecture usually leverages serveral ideas from
+the Domain Driven Design approach. Among other things Domain Driven
+Design describes a concept, which is called an aggregate.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-26" class="outline-2">
+<h2 id="sec-26"><span class="section-number-2">26</span> Definition: Aggregate &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-26">
+
+
+<p>
+Definition:<br/>
+<br/>
+A cluster of associated objects that are treated as a unit for the
+purpose of data changes. External references are restricted to one
+member of the aggregate, designated as the root. A set of consistency
+rules applies within the aggregate's boundaries.<br/>
+</p>
+<p>
+Source: <a href="http://domaindrivendesign.org/node/88">http://domaindrivendesign.org/node/88</a>
+</p>
+
+</div>
+
+<div id="outline-container-26-1" class="outline-3">
+<h3 id="sec-26-1"><span class="section-number-3">26.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-26-1">
+
+<p>This is a definition of the aggregate concept by the domain driven
+design community.
+</p>
+<p>
+It is a complex construct to maintain an even more complex net of
+objects.
+</p>
+<p>
+Thankfully, through Clojure's simplicity and its time model
+we can have a simple notion of an aggregate. Let's take a look at
+the way how the aggregate concept is implemented in eve.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-27" class="outline-2">
+<h2 id="sec-27"><span class="section-number-2">27</span> An aggregate &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-27">
+
+
+
+
+<pre class="src src-clojure">{
+ <span class="org-constant">:_aggregate</span> 123
+ <span class="org-constant">:_pos</span> 1
+ <span class="org-constant">:items</span> {456 1} <span class="org-comment-delimiter">;; </span><span class="org-comment">product "Clojure Book" with id: 456 </span>
+}
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-27-1" class="outline-3">
+<h3 id="sec-27-1"><span class="section-number-3">27.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-27-1">
+
+<p>An aggregate in eve is merely a plain Clojure map, which of course can
+include nested maps and other data structures. The aggregate value is
+associated with the identity of the aggregate through the :_aggregate
+entry.
+</p>
+<p>
+The _pos entry or rather the position entry is a simple counter, which
+is incremented on every event that is issued on the aggregate. As I
+already mentioned in the introduction, the position is essential,
+since it is stored inside the corresponding event and defines the
+causal order of the events, which have happened on the given identity
+or rather aggregate here.
+</p>
+<p>
+The aggregate value is typically used to store the data, which is
+needed to protect the rules and constraints defined by the given
+aggregate. In other words it is the data for your domain logic.
+</p>
+<p>
+So in the case of an shopping cart the aggregate value can be used to
+check for example, if a given quantity of a product can be removed
+from the shopping cart without causing a negative quantity. Therefore
+the aggregate value on this slide tracks the quantities of the
+different products in a map under the :items key. 
+</p>
+<p>
+All this kind of checking is done by the so-called command handlers. A
+command handler is a function which receives the aggregate value and
+the command map as parameters. The result of a command handler is
+sequence of events.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-28" class="outline-2">
+<h2 id="sec-28"><span class="section-number-2">28</span> A command handler &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-28">
+
+
+
+
+<pre class="src src-clojure">(<span class="org-keyword">defn</span> <span class="org-function-name">shopping-cart-add</span> [aggregate command]
+   (<span class="org-variable-name">list</span> 
+    (<span class="org-builtin">-&gt;</span> command
+      (<span class="org-variable-name">assoc</span> <span class="org-constant">:_event</span> (<span class="org-constant">:_command</span> command))
+      (<span class="org-variable-name">dissoc</span> <span class="org-constant">:_command</span>))))
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-28-1" class="outline-3">
+<h3 id="sec-28-1"><span class="section-number-3">28.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-28-1">
+
+<p>On this slide you see the command handler for the shopping-cart/add
+command. The command handler receives the aggregate value or rather
+current state of the aggregate and the given command as parameters.
+</p>
+<p>
+Here the command handler merely converts the command map into an event
+map.
+</p>
+<p>
+But normally the command handler implementation use the current state
+of the aggregate to figure out, which events should be
+returned. 
+</p>
+<p>
+Naturally the command handler can also decide to reject the handling
+of the given command by throwing an exception. Like it would be
+necessary in the aforementioned scenario, where otherwise a negative
+quantity in the shopping cart would be the result.
+</p>
+<p>
+The eve library offers some convenience functions to implement command
+handlers and stick them together. Basically, command handlers can be
+combined in a similar fashion like the request handlers in the context
+of a Ring web application.
+</p>
+<p>
+So the command handler has figured out, which events should be applied
+to the current state of the aggregate. But which component in our CQRS
+architecture should modifiy the state of the aggregate?
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-29" class="outline-2">
+<h2 id="sec-29"><span class="section-number-2">29</span> The aggregate repository &nbsp;&nbsp;&nbsp;<span class="tag"><span class="cqrs_slide">cqrs_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-29">
+
+
+<p>
+<img src="resources/CQRS Architecture - Repository.svg"  alt="resources/CQRS Architecture - Repository.svg" />
+</p>
+
+</div>
+
+<div id="outline-container-29-1" class="outline-3">
+<h3 id="sec-29-1"><span class="section-number-3">29.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-29-1">
+
+<p>This leads us to one part of the CQRS architecture which is still
+unexplained. This part takes care that the aggregate is loaded, so
+that further commands can be processed on the aggregate. The name of
+this part or rather concept is: Repository.
+</p>
+<p>
+In many CQRS implementations the repository is complected with the
+storage and coordination mechanism. In eve the mechanics of a
+repository are separated from these details.
+</p>
+<p>
+However you still need some kind of coordination mechanism, to handle
+the changes on an aggregate consistently. One possibility is to place
+the state of an aggregate inside a Clojure atom.
+</p>
+<p>
+But the core of eve is not complected with any coordination
+mechanism. So you are able to choose the technology which fits your
+application best. If you need to coordinate changes between multiple
+aggregates you can leverage Clojure's STM and place your aggregate
+state inside a ref. Or you use Avout to coordinate changes on your
+aggregates between multiple nodes.
+</p>
+<p>
+The crazy thing here is that we also use the event sourcing technique
+to change the current state of an aggregate.
+</p>
+<p>
+Like in the read model situation the current state of an aggregate is
+continuously updated by applying the new events to it. For the
+implementation of the corresponding event handlers, that build the
+current state of the aggregate, we can leverage the same event sourcing
+functions, which we have already used on the read side.
+</p>
+<p>
+However the data of an aggregate value is only used by the command
+handlers or rather for write operations. Therefore it is very
+different to the data, which you typically would found in a read
+model. For that reason I have decided to call the data of an
+aggregate value: write model. 
+</p>
+<p>
+Sometimes the write model of an aggregate is not loaded yet, so that
+you need to receive it somehow.
+</p>
+<p>
+To load the write model of an aggregate we simply use the events of
+the aggregate, which are stored inside the event store.
+</p>
+<p>
+So, we still need some kind of handler that knows how to build and
+update the write model of our example aggregate.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-30" class="outline-2">
+<h2 id="sec-30"><span class="section-number-2">30</span> A shopping cart write model handler &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-30">
+
+
+
+
+<pre class="src src-clojure"><span class="org-comment-delimiter">;; </span><span class="org-comment">processing event:</span>
+
+{<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/add</span>
+ <span class="org-constant">:_aggregate</span> 123
+ <span class="org-constant">:product</span> 456
+ <span class="org-constant">:name</span> <span class="org-string">"Clojure Book"</span>
+ <span class="org-constant">:quantity</span> 4}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Aggregate write model afterwards:</span>
+
+{
+ <span class="org-constant">:_aggregate</span> 159
+ <span class="org-constant">:items</span> {456 4}
+}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">processing event:</span>
+
+{<span class="org-constant">:_event</span> <span class="org-constant">:shopping-cart/remove</span>
+ <span class="org-constant">:_aggregate</span> 123
+ <span class="org-constant">:product</span> 456
+ <span class="org-constant">:name</span> <span class="org-string">"Clojure Book"</span>
+ <span class="org-constant">:quantity</span> 2}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Aggregate write model afterwards:</span>
+
+{
+ <span class="org-constant">:_aggregate</span> 159
+ <span class="org-constant">:items</span> {456 2}
+}
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">The write model handler</span>
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">shopping-cart-item-quantity</span> [aggregate event]
+  (<span class="org-builtin">let</span> [event-name (<span class="org-constant">:_event</span> event)
+        product-id (<span class="org-constant">:product</span> event)
+        quantity (<span class="org-constant">:quantity</span> event)
+        current-quantity (<span class="org-builtin">or</span> (<span class="org-variable-name">get-in</span> aggregate [<span class="org-constant">:items</span> product-id]) 0)
+        new-quantity (<span class="org-builtin">if</span> (<span class="org-variable-name">=</span> event-name <span class="org-constant">:shopping-cart/add</span>)
+                       (<span class="org-variable-name">+</span> current-quantity quantity)
+                       (<span class="org-variable-name">-</span> current-quantity quantity))]
+    (<span class="org-variable-name">assoc-in</span> aggregate [<span class="org-constant">:items</span> product-id] new-quantity)))
+
+
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-30-1" class="outline-3">
+<h3 id="sec-30-1"><span class="section-number-3">30.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-30-1">
+
+<p>@ Explain the source code on the slide
+</p>
+<p>
+With this information we could reject a shopping-cart/remove command
+that tries to remove more items of a product as there are currently in
+the shopping cart. In this way we would avoid negative quantities.
+</p>
+<p>
+Last but not least here is a possible version of the corresponding
+command handler:
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-31" class="outline-2">
+<h2 id="sec-31"><span class="section-number-2">31</span> A shopping cart command handler &nbsp;&nbsp;&nbsp;<span class="tag"><span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-31">
+
+
+
+
+<pre class="src src-clojure">(<span class="org-keyword">defn</span> <span class="org-function-name">shopping-cart-remove</span> [aggregate command]
+  (<span class="org-builtin">let</span> [product-id (<span class="org-constant">:product</span> command)
+        remove-quantity (<span class="org-constant">:quantity</span> command)
+        current-quantity (<span class="org-variable-name">get-in</span> aggregate [<span class="org-constant">:items</span> product-id])]
+    (<span class="org-builtin">if</span> (<span class="org-variable-name">&gt;=</span> current-quantity remove-quantity)
+       (<span class="org-variable-name">list</span> (command-&gt;event command))
+       (<span class="org-builtin">throw</span> (<span class="org-preprocessor">Exception.</span> 
+               (<span class="org-variable-name">str</span> <span class="org-string">"There are only "</span> current-quantity 
+                    <span class="org-string">" items of the product "</span> product-id 
+                    <span class="org-string">" inside the shopping cart,"</span>
+                    <span class="org-string">" but you have tried to remove "</span>  
+                    remove-quantity <span class="org-string">" items."</span>))))))
+
+
+</pre>
+
+
+
+
+
+</div>
+
+<div id="outline-container-31-1" class="outline-3">
+<h3 id="sec-31-1"><span class="section-number-3">31.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-31-1">
+
+<p>@ Explain the source code on the slide
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-32" class="outline-2">
+<h2 id="sec-32"><span class="section-number-2">32</span> eve &nbsp;&nbsp;&nbsp;<span class="tag"><span class="centered_slide">centered_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-32">
+
+
+<p>
+eve
+</p>
+
+</div>
+
+<div id="outline-container-32-1" class="outline-3">
+<h3 id="sec-32-1"><span class="section-number-3">32.1</span> &nbsp;&nbsp;&nbsp;<span class="tag"><span class="notes">notes</span></span></h3>
+<div class="outline-text-3" id="text-32-1">
+
+
+<p>
+At the moment the eve library is really only a couple of convenience
+functions to realize event sourcing and a CQRS architecture in
+Clojure.
+</p>
+<p>
+The talk already showed the main insights, which was necessary to
+transfer the CQRS approach into the functional world of Clojure. These
+insights are the main assets of eve.
+</p>
+<p>
+Regrettably, the preparations for this talk has consumed almost all of
+my free time in the last couple of weeks, so there was only a little
+time left to extract eve from our codebase.
+</p>
+<p>
+However the extraction is already done, but there is almost no
+documentation and no comprehensive example, which shows how to use
+eve. So I have decided to release eve in a couple of weeks, when it is
+ready for the public.
+</p>
+<p>
+Nevertheless if you are planing to realize a CQRS architecture in
+Clojure, talk to me and we will figure out, if a preview version of
+eve can help you.
+</p>
+<p>
+In any case I will announce the first release of eve on the Clojure
+mailing list.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-33" class="outline-2">
+<h2 id="sec-33"><span class="section-number-2">33</span> Questions &nbsp;&nbsp;&nbsp;<span class="tag"><span class="centered_slide">centered_slide</span>&nbsp;<span class="slide">slide</span></span></h2>
+<div class="outline-text-2" id="text-33">
+
+
+<p>
+Questions?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-34" class="outline-2">
+<h2 id="sec-34"><span class="section-number-2">34</span> </h2>
+<div class="outline-text-2" id="text-34">
+
+
+
+
+
+
+<script type="text/javascript" src="resources/org-html-slideshow.js"></script>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2012-05-24 08:58:51 BST</p>
+<p class="author">Author: Max Weber</p>
+<p class="creator">Org version 7.7 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
